@@ -49,7 +49,7 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
-        // start music here
+        // start music her
         //this.sound.play('gme_music');
 
 
