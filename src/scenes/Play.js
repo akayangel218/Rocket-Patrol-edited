@@ -47,6 +47,9 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
+        // start music
+        this.sound.play('gme_music');
+
 
         // mod 1: the high score
         // initialize score
@@ -76,6 +79,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            // stop music
         }, null, this);
     }
 
