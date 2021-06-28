@@ -117,7 +117,6 @@ class Play extends Phaser.Scene {
     update() {
 
         // check timer
-        this.timer -= 1;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
@@ -156,6 +155,8 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.missileExplode(this.missile);
         }
+
+        console.log(this.timer);
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update rocket sprite
@@ -197,14 +198,17 @@ class Play extends Phaser.Scene {
 
         let boom;
         if (ship == this.ship01) {
+            this.timer = this.timer + 2;
             boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
             boom.anims.play('explode');             // play explode animation
         }
         else if (ship == this.ship02) {
+            this.timer += 5;
             boom = this.add.sprite(ship.x, ship.y, 'explosion2').setOrigin(0, 0);
             boom.anims.play('explode2');             // play explode animation
         }
         else if (ship == this.ship03){
+            this.timer += 10;
             boom = this.add.sprite(ship.x, ship.y, 'explosion3').setOrigin(0, 0);
             boom.anims.play('explode3');             // play explode animation
         }
@@ -217,7 +221,9 @@ class Play extends Phaser.Scene {
         this.sound.play('sfx_explosion');
 
         // score add and repaint
+        console.log(this.timer);
         this.p1Score += ship.points;
+        this.timeRight.text = this.timer;
         this.scoreLeft.text = this.p1Score;
     }
 
@@ -236,7 +242,9 @@ class Play extends Phaser.Scene {
         this.sound.play('sfx_explosion');
 
         // score add and repaint
+        this.timer = this.timer + 20;
         this.p1Score += missile.points;
+        this.timeRight.text = this.timer;
         this.scoreLeft.text = this.p1Score;
     }
 }
