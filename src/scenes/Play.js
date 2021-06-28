@@ -48,7 +48,7 @@ class Play extends Phaser.Scene {
         });
 
 
-        // mod 1: high score
+        // mod 1: the high score
         // initialize score
         this.p1Score = 0;
         
