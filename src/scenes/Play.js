@@ -116,7 +116,8 @@ class Play extends Phaser.Scene {
 
     update() {
 
-        // check timer
+        this.timer = game.settings.gameTimer / 1000;
+        this.timeRight.text = this.timer;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
