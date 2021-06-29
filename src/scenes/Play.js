@@ -99,6 +99,7 @@ class Play extends Phaser.Scene {
 
         // start music here
         this.sound.play('gme_music');
+        this.sound.setVolume(0.1);
 
 
         // initialize score
@@ -130,6 +131,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
             // stop music
+            this.sound.stopByKey('gme_music');
         }, null, this);
     }
 
