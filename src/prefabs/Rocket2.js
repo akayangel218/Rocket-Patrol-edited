@@ -1,4 +1,4 @@
-// Rocket prefab
+// Rocket 2 prefab
 class Rocket2 extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);

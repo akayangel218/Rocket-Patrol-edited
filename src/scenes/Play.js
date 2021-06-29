@@ -1,3 +1,10 @@
+/*
+Name: Kidus Michael
+Project TItle: Rocket Patrol Edited
+Date: 28 June 2021
+Time it took to complete: 2.5-3 days
+*/
+
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
