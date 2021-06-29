@@ -7,6 +7,8 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('spaceship2', './assets/spaceship2.png');
+        this.load.image('spaceship3', './assets/spaceship3.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('missile', './assets/missile.png');
 
@@ -42,8 +44,8 @@ class Play extends Phaser.Scene {
 
         // add spaceships (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship2', 0, 20).setOrigin(0,0);
+        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship3', 0, 10).setOrigin(0,0);
 
         // add missile
         this.missile = new Missile(this, game.config.width, borderUISize*6 + borderPadding*-7, 'missile', 0, 50).setOrigin(0,0);
@@ -112,8 +114,6 @@ class Play extends Phaser.Scene {
         
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
-        this.timer = game.settings.gameTimer / 1000;
-        this.timeRight.text = this.timer;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
@@ -123,6 +123,10 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+
+
+        this.timer = (game.settings.gameTimer / 1000) - 1;
+        this.timeRight.text = this.timer;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
