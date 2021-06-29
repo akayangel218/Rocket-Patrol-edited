@@ -91,7 +91,7 @@ class Play extends Phaser.Scene {
         });
 
         // start music here
-        //this.sound.play('gme_music');
+        this.sound.play('gme_music');
 
 
         // mod 1: the high score
