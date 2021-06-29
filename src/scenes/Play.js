@@ -101,11 +101,8 @@ class Play extends Phaser.Scene {
         this.sound.play('gme_music');
 
 
-        // mod 1: the high score
         // initialize score
         this.p1Score = 0;
-        this.timer = game.settings.gameTimer / 1000;
-        this.max = game.settings.gameTimer;
         
         // display score
         let scoreConfig = {
@@ -121,16 +118,12 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        this.timeRight = this.add.text((borderUISize + borderPadding) * 11.5, borderUISize + borderPadding*2, this.timer, scoreConfig);
 
         // GAME OVER flag
         this.gameOver = false;
         
         // 60/45-second play clock
         scoreConfig.fixedWidth = 0;
-
-        this.timer = game.settings.gameTimer / 1000;
-        this.timeRight.text = this.timer;
 
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
