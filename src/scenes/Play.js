@@ -23,8 +23,13 @@ class Play extends Phaser.Scene {
         //place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
-        // green UI background
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        // green or red UI background (green = Novice, red = Expert)
+        if (game.settings.gameTimer == 45000) {
+            this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0xFF0000).setOrigin(0, 0);
+        }
+        else {
+            this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);   
+        }
 
         // white borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
@@ -76,6 +81,7 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion4', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
+
         // start music here
         //this.sound.play('gme_music');
 
@@ -106,6 +112,8 @@ class Play extends Phaser.Scene {
         
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
+        this.timer = game.settings.gameTimer / 1000;
+        this.timeRight.text = this.timer;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
@@ -115,9 +123,6 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-
-        this.timer = game.settings.gameTimer / 1000;
-        this.timeRight.text = this.timer;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
@@ -199,7 +204,7 @@ class Play extends Phaser.Scene {
 
         let boom;
         if (ship == this.ship01) {
-            this.timer = this.timer + 2;
+            this.timer = this.timer + 10;
             boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
             boom.anims.play('explode');             // play explode animation
         }
@@ -208,8 +213,8 @@ class Play extends Phaser.Scene {
             boom = this.add.sprite(ship.x, ship.y, 'explosion2').setOrigin(0, 0);
             boom.anims.play('explode2');             // play explode animation
         }
-        else if (ship == this.ship03){
-            this.timer += 10;
+        else if (ship == this.ship03) {
+            this.timer += 2;
             boom = this.add.sprite(ship.x, ship.y, 'explosion3').setOrigin(0, 0);
             boom.anims.play('explode3');             // play explode animation
         }
